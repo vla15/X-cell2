@@ -1,5 +1,5 @@
 const removeChildren = function(parentEl) {
-	if (parentEl.firstChild) {
+	while (parentEl.firstChild) {
 		parentEl.removeChild(parentEl.firstChild);
 	}
 };
