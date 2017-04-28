@@ -9,9 +9,9 @@ const getLetterRange = function(firstLetter = 'A', numLetters) {
 	return getRange(rangeStart, rangeEnd).map(charCode => String.fromCharCode(charCode));
 };
 
-const getSum = function(...numbers) {
+const getSum = function(numbers) {
 	if (typeof numbers !== undefined && numbers.length > 0) {
-		return numbers.reduce((num1, num2) => {
+		return numbers.reduce(function (num1, num2) {
 			return num1 + num2;
 		},0)
 	} else {

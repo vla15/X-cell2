@@ -17,10 +17,22 @@ const getLetterRange = function(firstLetter = 'A', numLetters) {
 	return getRange(rangeStart, rangeEnd).map(charCode => String.fromCharCode(charCode));
 };
 
+const getSum = function(numbers) {
+	if (typeof numbers !== undefined && numbers.length > 0) {
+		return numbers.reduce(function (num1, num2) {
+			return num1 + num2;
+		},0)
+	} else {
+		return numbers;
+	}
+}
+
+
 
 module.exports = {
 	getRange: getRange,
-	getLetterRange: getLetterRange
+	getLetterRange: getLetterRange,
+	getSum: getSum
 };
 },{}],3:[function(require,module,exports){
 const removeChildren = function(parentEl) {
@@ -74,7 +86,7 @@ class TableModel {
 
 module.exports = TableModel;
 },{}],5:[function(require,module,exports){
-const { getLetterRange } = require('./array_util');
+const { getLetterRange, getSum } = require('./array_util');
 const { removeChildren, createTR, createTH, createTD } = require('./dom-util');
 
 class TableView {
@@ -93,6 +105,7 @@ class TableView {
 		this.headerRowEl = document.querySelector('THEAD TR');
 		this.sheetBodyEl = document.querySelector('TBODY');
 		this.formulaBarEl = document.querySelector('#formula-bar');
+		this.sumRowEl = document.querySelector('.sum-row');
 
 	}
 
@@ -114,6 +127,30 @@ class TableView {
 	renderTable() {
 		this.renderTableHeader();
 		this.renderTableBody();
+		this.renderSumRow();
+	}
+
+	renderSumRow() {
+		const fragment = document.createDocumentFragment();
+		const tr = createTR();
+		tr.setAttribute('class', 'sum-row');
+		for (let col = 0; col < this.model.numCols; col++) {
+			let colNumbers = [];
+			for (let row = 0; row < this.model.numRows; row++) {
+				const position = {col: col, row: row};
+				const value = this.model.getValue(position);
+				if (!isNaN(value)) {
+					colNumbers.push(parseInt(value, 10));
+				}
+			}
+			colNumbers = colNumbers.filter(num => !isNaN(num))
+			const total = getSum(colNumbers).toString();
+
+			const td = createTD(total);
+			tr.appendChild(td);
+		}
+		fragment.appendChild(tr);
+		this.sheetBodyEl.appendChild(fragment);
 	}
 
 	renderTableHeader() {
@@ -160,6 +197,7 @@ class TableView {
 		const value = this.formulaBarEl.value;
 		this.model.setValue(this.currentCellLocation, value);
 		this.renderTableBody();
+		this.renderSumRow();
 	}
 
 	handleSheetClick(evt) {
@@ -170,6 +208,7 @@ class TableView {
 		this.currentCellLocation = { col: col, row: row }
 		this.renderTableBody();
 		this.renderFormulaBar();
+		this.renderSumRow();
 	}
 }
 

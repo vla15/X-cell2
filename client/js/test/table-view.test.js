@@ -11,6 +11,19 @@ describe('table view', () => {
 		document.documentElement.innerHTML = html;
 	});
 
+	describe('sum row bar,', () => {
+		it('sums the entire col', () => {
+			const model = new TableModel(3 ,3);
+			const view = new TableView(model);
+			model.setValue({col: 0, row: 1}, 10);
+			model.setValue({col: 0, row: 2}, 5);
+			view.init();
+
+			let trs = document.querySelectorAll('.sum-row')
+			expect(trs[0].cells[0].textContent).toBe('15');
+		})
+	})
+
 	describe('formula bar', () => {
 
 		it('makes changes to the value of the current cell', () => {

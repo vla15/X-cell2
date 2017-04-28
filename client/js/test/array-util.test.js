@@ -33,10 +33,10 @@ describe('array util', () => {
 
 	describe('getSum()', () => {
 		it('sums numbers', () => {
-			expect(getSum(1, 2, 3)).toEqual(6);
-			expect(getSum(-1, -3, -5)).toEqual(-9);
-			expect(getSum(0, 5, -3)).toEqual(2);
-			expect(getSum()).toEqual([]);
+			expect(getSum([1, 2, 3])).toEqual(6);
+			expect(getSum([-1, -3, -5])).toEqual(-9);
+			expect(getSum([0, 5, -3])).toEqual(2);
+			expect(getSum([])).toEqual([]);
 		})
 	})
 })
