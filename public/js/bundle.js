@@ -105,8 +105,10 @@ class TableView {
 		this.headerRowEl = document.querySelector('THEAD TR');
 		this.sheetBodyEl = document.querySelector('TBODY');
 		this.formulaBarEl = document.querySelector('#formula-bar');
+		this.addRowEl = document.querySelector('#add-row');
+		this.addColEl = document.querySelector('#add-col');
 		this.sumRowEl = document.querySelector('.sum-row');
-
+		console.log(this.addRowEl);
 	}
 
 	initCurrentCell() {
@@ -128,6 +130,18 @@ class TableView {
 		this.renderTableHeader();
 		this.renderTableBody();
 		this.renderSumRow();
+	}
+
+	addRow(event) {
+		event.preventDefault();
+		this.model.numRows++;
+		this.renderTable();
+	}
+
+	addCol(event) {
+		event.preventDefault();
+		this.model.numCols++
+		this.renderTable();
 	}
 
 	renderSumRow() {
@@ -188,8 +202,10 @@ class TableView {
 	}
 
 	attachEventHandlers() {
-		this.sheetBodyEl.addEventListener('click', this.handleSheetClick.bind(this))
-		this.formulaBarEl.addEventListener('keyup', this.handleFormulaBarChange.bind(this))
+		this.sheetBodyEl.addEventListener('click', this.handleSheetClick.bind(this));
+		this.formulaBarEl.addEventListener('keyup', this.handleFormulaBarChange.bind(this));
+		this.addRowEl.addEventListener('submit', this.addRow.bind(this));
+		this.addColEl.addEventListener('submit', this.addCol.bind(this));
 	}
 
 

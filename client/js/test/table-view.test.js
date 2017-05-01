@@ -11,6 +11,20 @@ describe('table view', () => {
 		document.documentElement.innerHTML = html;
 	});
 
+	describe('add row button', () => {
+		it('adds another row to the table body', () => {
+			const model = new TableModel(3, 3);
+			const view = new TableView(model);
+			view.init();
+
+			expect(model.numRows).toEqual(3);
+			const trs = document.querySelector('#add-row')
+			trs.submit();
+
+			expect(model.numRows).toEqual(4);
+		})
+	})
+
 	describe('sum row bar,', () => {
 		it('sums the entire col', () => {
 			const model = new TableModel(3 ,3);

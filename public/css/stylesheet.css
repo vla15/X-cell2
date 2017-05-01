@@ -3,9 +3,7 @@ table {
 
 }
 
-
-th,
-td {
+th, td {
 	border: 1px solid black;
 	min-width: 100px;
 	height: 25px;
@@ -18,4 +16,9 @@ td {
 
 .sum-row {
 	background-color: #8bc34a;
+}
+
+button {
+	height: 25px;
+	margin-top: 10px;
 }
