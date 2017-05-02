@@ -11,21 +11,45 @@ describe('table view', () => {
 		document.documentElement.innerHTML = html;
 	});
 
-	describe('add row button', () => {
-		it('adds another row to the bottom of the table body when clicked', () => {
-			const model = new TableModel(3, 3);
+	describe('add col button', () => {
+		it('adds another column after the last column when clicked', () => {
+			const numRows = 5;
+			const numCols = 10;
+			const model = new TableModel(numCols, numRows);
 			const view = new TableView(model);
 			view.init();
 
-			const trs = document.querySelector('TBODY');
-			const rowCount = trs.childElementCount
+			let ths = document.querySelectorAll('THEAD TH')
+			expect(ths.length).toBe(numCols);
 
-			expect(rowCount).toEqual(4);
-			const addRow = document.querySelector('#add-row');
+			model.numCols++;
+			view.renderTable();
 
-			addRow.submit();
+			ths = document.querySelectorAll('THEAD TH');
+			expect(ths.length).toBe(numCols + 1);
 
-			expect(rowCount).toEqual(5);
+		})
+	})
+
+	describe('add row button', () => {
+		it('adds another row to the bottom of the table body but before the sum-row when clicked', () => {
+			const model = new TableModel(3, 3);
+			let view = new TableView(model);
+			view.init();
+
+			let trs = document.querySelectorAll('TBODY TR')
+			let td = trs[3];
+			expect(td.getAttribute('class')).toBe('sum-row');
+
+			model.numRows++;
+			view.renderTable();
+			trs = document.querySelectorAll('TBODY TR');
+			td = trs[3];
+
+			expect(td.getAttribute('class')).not.toBe('sum-row');
+
+			td = trs[4];
+			expect(td.getAttribute('class')).toBe('sum-row');
 
 
 		})
