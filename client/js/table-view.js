@@ -43,13 +43,13 @@ class TableView {
     this.renderSumRow();
   }
 
-  addRow(event) {
+  addRow() {
     event.preventDefault();
     this.model.numRows++;
     this.renderTable();
   }
 
-  addCol(event) {
+  addCol() {
     event.preventDefault();
     this.model.numCols++
     this.renderTable();
