@@ -20,7 +20,7 @@ class TableView {
 		this.addRowEl = document.querySelector('#add-row');
 		this.addColEl = document.querySelector('#add-col');
 		this.sumRowEl = document.querySelector('.sum-row');
-		console.log(this.addRowEl);
+		console.log(this.sheetBodyEl);
 	}
 
 	initCurrentCell() {

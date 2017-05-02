@@ -12,16 +12,22 @@ describe('table view', () => {
 	});
 
 	describe('add row button', () => {
-		it('adds another row to the table body', () => {
+		it('adds another row to the bottom of the table body when clicked', () => {
 			const model = new TableModel(3, 3);
 			const view = new TableView(model);
 			view.init();
 
-			expect(model.numRows).toEqual(3);
-			const trs = document.querySelector('#add-row')
-			trs.submit();
+			const trs = document.querySelector('TBODY');
+			const rowCount = trs.childElementCount
 
-			expect(model.numRows).toEqual(4);
+			expect(rowCount).toEqual(4);
+			const addRow = document.querySelector('#add-row');
+
+			addRow.submit();
+
+			expect(rowCount).toEqual(5);
+
+
 		})
 	})
 
