@@ -50,8 +50,6 @@ describe('dom-util', () => {
       removeChildren(parent);
 
       expect(parent.childNodes.length).toBe(0);
-
-
     })
   });
-})
+});

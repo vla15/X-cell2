@@ -81,8 +81,8 @@ class TableView {
   renderTableHeader() {
     removeChildren(this.headerRowEl);
     getLetterRange('A', this.model.numCols)
-    .map(colLabel => createTH(colLabel))
-    .forEach(th => this.headerRowEl.appendChild(th))
+      .map(colLabel => createTH(colLabel))
+      .forEach(th => this.headerRowEl.appendChild(th));
   }
 
   isCurrentCell(col, row) {
@@ -130,8 +130,6 @@ class TableView {
   handleSheetClick(evt) {
     const col = evt.target.cellIndex;
     const row = evt.target.parentElement.rowIndex - 1;
-
-
     this.currentCellLocation = { col: col, row: row }
     this.renderTableBody();
     this.renderFormulaBar();
