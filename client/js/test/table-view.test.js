@@ -19,15 +19,14 @@ describe('table view', () => {
       const view = new TableView(model);
       view.init();
 
-      let ths = document.querySelectorAll('THEAD TH')
+      let ths = document.querySelectorAll('THEAD TH');
       expect(ths.length).toBe(numCols);
 
-      model.numCols++;
-      view.renderTable();
+      view.addCol();
 
       ths = document.querySelectorAll('THEAD TH');
       expect(ths.length).toBe(numCols + 1);
-
+      expect(ths[10].textContent).toEqual('K');
     })
   })
 
@@ -37,21 +36,17 @@ describe('table view', () => {
       let view = new TableView(model);
       view.init();
 
-      let trs = document.querySelectorAll('TBODY TR')
+      let trs = document.querySelectorAll('TBODY TR');
       let td = trs[3];
       expect(td.getAttribute('class')).toBe('sum-row');
 
-      model.numRows++;
-      view.renderTable();
+      view.addRow();
+
       trs = document.querySelectorAll('TBODY TR');
       td = trs[3];
-
       expect(td.getAttribute('class')).not.toBe('sum-row');
-
       td = trs[4];
       expect(td.getAttribute('class')).toBe('sum-row');
-
-
     })
   })
 
@@ -63,7 +58,7 @@ describe('table view', () => {
       model.setValue({col: 0, row: 2}, 5);
       view.init();
 
-      let trs = document.querySelectorAll('.sum-row')
+      let trs = document.querySelectorAll('.sum-row');
       expect(trs[0].cells[0].textContent).toBe('15');
     })
   })
@@ -139,10 +134,7 @@ describe('table view', () => {
       const model = new TableModel(3, 3);
       const view = new TableView(model);
       model.setValue({col: 2, row: 1}, '123');
-      //model.setValue({col: 1, row: 1}, '123');
       view.init();
-
-      //expect(model.getValue({col: 2, row: 1})).toBe('123');
 
       const trs = document.querySelectorAll('TBODY TR');
       expect(trs[1].cells[2].textContent).toBe('123');
@@ -154,14 +146,14 @@ describe('table view', () => {
       const numCols = 6;
       const numRows = 10;
       const model = new TableModel(numCols, numRows);
-      const view = new TableView(model)
+      const view = new TableView(model);
       view.init();
 
-      let ths = document.querySelectorAll('THEAD TH')
+      let ths = document.querySelectorAll('THEAD TH');
       expect(ths.length).toBe(numCols);
 
       let labelTexts = Array.from(ths).map(el => el.textContent);
-      expect(labelTexts).toEqual(['A', 'B', 'C', 'D', 'E', 'F'])
+      expect(labelTexts).toEqual(['A', 'B', 'C', 'D', 'E', 'F']);
     });
   });
 });

@@ -44,14 +44,12 @@ class TableView {
   }
 
   addRow() {
-    event.preventDefault();
     this.model.numRows++;
     this.renderTable();
   }
 
   addCol() {
-    event.preventDefault();
-    this.model.numCols++
+    this.model.numCols++;
     this.renderTable();
   }
 
@@ -68,7 +66,7 @@ class TableView {
           colNumbers.push(parseInt(value, 10));
         }
       }
-      colNumbers = colNumbers.filter(num => !isNaN(num))
+      colNumbers = colNumbers.filter(num => !isNaN(num));
       const total = getSum(colNumbers).toString();
 
       const td = createTD(total);
@@ -96,7 +94,7 @@ class TableView {
       const tr = createTR();
       for (let col = 0; col < this.model.numCols; col++) {
         const position = {col: col, row: row};
-        const value = this.model.getValue(position)
+        const value = this.model.getValue(position);
         const td = createTD(value);
 
         if (this.isCurrentCell(col, row)) {
@@ -130,11 +128,11 @@ class TableView {
   handleSheetClick(evt) {
     const col = evt.target.cellIndex;
     const row = evt.target.parentElement.rowIndex - 1;
-    this.currentCellLocation = { col: col, row: row }
+    this.currentCellLocation = { col: col, row: row };
     this.renderTableBody();
     this.renderFormulaBar();
     this.renderSumRow();
   }
-}
+};
 
 module.exports = TableView;
