@@ -25,6 +25,7 @@ class TableView {
   initCurrentCell() {
     this.currentCellLocation = {col: 0, row: 0 };
     this.renderFormulaBar();
+    document.getElementById('hi')
   }
 
   normalizeValueforRendering(value) {
@@ -68,7 +69,6 @@ class TableView {
       }
       colNumbers = colNumbers.filter(num => !isNaN(num));
       const total = getSum(colNumbers).toString();
-
       const td = createTD(total);
       tr.appendChild(td);
     }
@@ -96,11 +96,9 @@ class TableView {
         const position = {col: col, row: row};
         const value = this.model.getValue(position);
         const td = createTD(value);
-
         if (this.isCurrentCell(col, row)) {
           td.className = 'current-cell';
         }
-
         tr.appendChild(td);
       }
       fragment.appendChild(tr);
