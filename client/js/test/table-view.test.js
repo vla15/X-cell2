@@ -22,7 +22,7 @@ describe('table view', () => {
 
       view.addCol();
       ths = document.querySelectorAll('THEAD TH');
-      expect(ths.length).toBe(numCols + 1);
+      expect(ths.length).toBe(numCols + 1);      
       expect(ths[10].textContent).toEqual('K');
     })
   })
@@ -40,6 +40,7 @@ describe('table view', () => {
       trs = document.querySelectorAll('TBODY TR');
       td = trs[3];
       expect(td.getAttribute('class')).not.toBe('sum-row');
+
       td = trs[4];
       expect(td.getAttribute('class')).toBe('sum-row');
     })
