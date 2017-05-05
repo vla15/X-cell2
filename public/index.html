@@ -1,19 +1,25 @@
 <html>
-	<head>
-		<link href='css/stylesheet.css' rel='stylesheet'>
-	</head>
-	<body>
-		<div class='container'>
-			<input id='formula-bar' type='text' value='' />
-			<table id='sheet-current'>
-				<thead>
-				<tr></tr>
-				</thead>
-				<tbody>
-				<tr></tr>
-				</tbody>
-			</table>
-		</div>
-		<script src='js/bundle.js'></script>
-	</body>
+  <head>
+    <link href='css/stylesheet.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='container'>
+      <input id='formula-bar' type='text' value='' />
+      <form id='add-row'>
+        <button>Add Row</button>
+      </form>
+      <form id='add-col'>
+        <button>Add Col</button>
+      </form>
+      <table id='sheet-current'>
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody>
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+    <script src='js/bundle.js'></script>
+  </body>
 </html>
